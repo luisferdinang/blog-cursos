@@ -66,9 +66,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('usuario.edit', compact("user"));
     }
 
     /**
@@ -78,19 +78,20 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $user->name = $request->name;
+        $user->password = bcrypt($request['password']);
+        $user->email = $request->email;
+
+        $user->save();
+        return view("usuario.show", compact("user"));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+     return redirect()->route("user.index");
     }
 }

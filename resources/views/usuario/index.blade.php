@@ -6,15 +6,16 @@
 
  @section('content')
  <h1>Usuarios</h1>
- <a href="{{route("user.create")}}">Crear usuario</a>
-
+ <a href="{{route("user.create")}}" class="btn btn-primary">Crear usuario</a> <i class="bi bi-person-plus"></i>
+ <br>
+<br>
  <table class="table">
   <thead class= "table-dark">
     <tr>
       <th scope="col">id</th>
       <th scope="col">Nombre</th>
       <th scope="col">Descripción</th>
-      <th scope="col">Handle</th>
+      <th scope="col">hash</th>
     </tr>
   </thead>
   <tbody>
@@ -28,5 +29,7 @@
     @endforeach
   </tbody>
 </table>
-{{$user->links()}}
+
+{{$user->links('vendor.pagination.bootstrap-4')}}
+
 @endsection
